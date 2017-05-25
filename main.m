@@ -12,13 +12,12 @@ addpath(genpath('/N/u/hayashis/BigRed2/git/jsonlab'))
 % normalizes the bvals and splits the bvecs
 
 % load config.json
-config = loadjson('config.json');
+config = loadjson('config.json.copy');
 
 % copy the dwi file to this directory
 copyfile(config.dwi, 'dwi.nii.gz');
 
 % Parameters used for normalization
-params.single_shells = config.shells;
 params.thresholds.b0_normalize    = 200;
 params.thresholds.bvals_normalize = 100;
 
@@ -31,16 +30,13 @@ bvals.val = dlmread(config.bvals);
 % This is necessary because the VISTASOFT software does not handle the B0
 % when they are not rounded.
 [bvals.unique, ~, bvals.uindex] = unique(bvals.val);
-if ~isequal(bvals.unique, params.single_shells)
-    bvals.unique(bvals.unique <= params.thresholds.b0_normalize) = 0;
-    bvals.unique  = round(bvals.unique./params.thresholds.bvals_normalize) ...
-        *params.thresholds.bvals_normalize;
-    bvals.valnorm = bvals.unique( bvals.uindex );
-    dlmwrite('dwi.bvals',bvals.valnorm);
-else
-    bvals.valnorm = bvals.val;
-    dlmwrite('dwi.bvals',bvals.valnorm);
-end
+
+bvals.unique(bvals.unique <= params.thresholds.b0_normalize) = 0;
+bvals.unique  = round(bvals.unique./params.thresholds.bvals_normalize) ...
+    *params.thresholds.bvals_normalize;
+bvals.valnorm = bvals.unique( bvals.uindex );
+dlmwrite('dwi.bvals',bvals.valnorm);
+
 
 
 %load bvecs
