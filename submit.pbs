@@ -1,6 +1,6 @@
 #!/bin/bash
-#PBS -l nodes=1:ppn=16:dc2,walltime=0:20:00
-#PBS -N sca-datanormalize
+#PBS -l nodes=1:ppn=16:dc2,walltime=0:10:00
+#PBS -N app-datanormalize
 #PBS -V
 
 cd $PBS_O_WORKDIR

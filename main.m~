@@ -63,9 +63,9 @@ if params.z_flip
     bvecs(3,:) = -bvecs(3,:);
 end
 
-savejson('', config,'products.json')
+savejson(,config,'
 
-dlmwrite('dwi.bvecs', bvecs);
+dlmwrite(dwi.bvecs, bvecs);
 
 
 

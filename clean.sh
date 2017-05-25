@@ -1,4 +1,4 @@
-rm *flipped.bvecs
+rm bvecs
 rm products.json
 rm sca-flipbvecs*
 rm finished
