@@ -12,7 +12,7 @@ addpath(genpath('/N/u/hayashis/BigRed2/git/jsonlab'))
 % normalizes the bvals and splits the bvecs
 
 % load config.json
-config = loadjson('config.json.copy');
+config = loadjson('config.json');
 
 % copy the dwi file to this directory
 copyfile(config.dwi, 'dwi.nii.gz');
