@@ -1,0 +1,8 @@
+{
+    "bvals": "",
+    "shells": [0 1000 2000 3000],
+    "bvecs": "/N/u/hayashis/Karst/testdata/sca-service-dtiinit/dwi.bvecs",
+    "xflip": "true"
+    "yflip": "false"
+    "zflip": "false"   
+}

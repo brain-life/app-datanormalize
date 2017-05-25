@@ -1,0 +1,6 @@
+{
+    "bvecs": "/N/u/hayashis/Karst/testdata/sca-service-dtiinit/dwi.bvecs",
+    "xflip": "true"
+    "yflip": "false"
+    "xflip": "false"   
+}
