@@ -1,9 +1,0 @@
-{
-    "dwi": "dwi.nii.gz",
-    "bvals": "dwi.bvals",
-    "shells": [0 1000 2000 3000],
-    "bvecs": "dwi.bvecs",
-    "xflip": true,
-    "yflip": false,
-    "zflip": false  
-}

@@ -1,9 +1,0 @@
-{
-    "dwi": "/N/dc2/projects/lifebid/wm_morphology/brainlifetest/100307/T1w/Diffusion/dwi.nii.gz",
-    "bvals": "/N/dc2/projects/lifebid/wm_morphology/brainlifetest/100307/T1w/Diffusion/bvals",
-    "shells": [0 1000 2000 3000],
-    "bvecs": "/N/dc2/projects/lifebid/wm_morphology/brainlifetest/100307/T1w/Diffusion/bvecs",
-    "xflip": true,
-    "yflip": false,
-    "zflip": false  
-}
