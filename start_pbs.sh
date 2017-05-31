@@ -7,20 +7,6 @@ if [ -z $SCA_SERVICE_DIR ]; then export SCA_SERVICE_DIR=`pwd`; fi
 
 #clean up previous job (just in case)
 rm -f finished
-module load matlab
+jobid=`qsub $SCA_SERVICE_DIR/submit.pbs`
+echo $jobid > jobid
 
-echo "starting main"
-
-(
-nohup time matlab -nodisplay -nosplash -r main > stdout.log 2> stderr.log
-
-#check for output files
-if [ -s dwi.bvecs ] && [ -s dwi.bvals ];
-then
-	echo 0 > finished
-else
-	echo "bvecs or bvals  missing"
-	echo 1 > finished
-	exit 1
-fi
-) &

@@ -3,3 +3,5 @@ config.json.copy
 products.json
 dwi*
 *~
+stderr.log
+stdout.log
