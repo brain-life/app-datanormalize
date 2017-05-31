@@ -9,9 +9,11 @@ if [ -z $SCA_SERVICE_DIR ]; then export SCA_SERVICE_DIR=`pwd`; fi
 rm -f finished
 module load matlab
 
+
 echo "starting main"
 
 (
+export MATLABPATH=$MATLABPATH:$SCA_SERVICE_DIR
 nohup time matlab -nodisplay -nosplash -r main > stdout.log 2> stderr.log
 
 #check for output files
