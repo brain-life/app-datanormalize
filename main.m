@@ -1,15 +1,20 @@
 function [] = main()
 
-if isempty(getenv('SCA_SERVICE_DIR'))
-    disp('setting SCA_SERVICE_DIR to pwd')
-    setenv('SCA_SERVICE_DIR', pwd)
+if isempty(getenv('SERVICE_DIR'))
+    disp('setting SERVICE_DIR to pwd')
+    setenv('SERVICE_DIR', pwd)
 end
 
-disp('loading paths')
-addpath(genpath('/N/u/hayashis/BigRed2/git/jsonlab'))
+switch getenv('ENV')
+    case 'IUHPC'
+        disp('loading paths (HPC)')
+        addpath(genpath('/N/u/hayashis/BigRed2/git/jsonlab'))
+    case 'VM'
+        disp('loading paths (VM)')
+        addpath(genpath('/usr/local/jsonlab'))
+end
 
-
-% normalizes the bvals and splits the bvecs
+% normalizes the bvals and flips the bvecs
 
 % load config.json
 config = loadjson('config.json');
@@ -20,7 +25,6 @@ copyfile(config.dwi, 'dwi.nii.gz');
 % Parameters used for normalization
 params.thresholds.b0_normalize    = 200;
 params.thresholds.bvals_normalize = 100;
-
 
 %% Normalize HCP files to the VISTASOFT environment
 
@@ -37,7 +41,7 @@ bvals.unique  = round(bvals.unique./params.thresholds.bvals_normalize) ...
 bvals.valnorm = bvals.unique( bvals.uindex );
 dlmwrite('dwi.bvals',bvals.valnorm);
 
-
+%% Flip the Bvecs on chosen axis
 
 %load bvecs
 bvecs = dlmread(config.bvecs);
@@ -63,25 +67,6 @@ savejson('', config,'products.json')
 
 dlmwrite('dwi.bvecs', bvecs);
 
-
-
-% may not be necessary depending on the data structure?
-% 
-% if params.x_flip && params.y_flip && params.z_flip
-%     dlmwrite(dwi_x_y_z_flipped.bvecs, bvecs);
-% elseif params.x_flip && params.y_flip && ~params.z_flip
-%     dlmwrite(dwi_x_y_flipped.bvecs, bvecs);
-% elseif params.x_flip && ~params.y_flip && params.z_flip
-%     dlmwrite(dwi_x_z_flipped.bvecs, bvecs);   
-% elseif ~params.x_flip && params.y_flip && params.z_flip
-%     dlmwrite(dwi_y_z_flipped.bvecs, bvecs);
-% elseif params.x_flip && ~params.y_flip && ~params.z_flip
-%     dlmwrite(dwi_x_flipped.bvecs, bvecs);
-% elseif ~params.x_flip && params.y_flip && ~params.z_flip
-%     dlmwrite(dwi_y_flipped.bvecs, bvecs);
-% elseif ~params.x_flip && ~params.y_flip && params.z_flip
-%     dlmwrite(dwi_z_flipped.bvecs, bvecs);
-% end
 end
 
 
