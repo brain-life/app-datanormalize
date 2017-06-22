@@ -3,6 +3,8 @@ config.json
 config.json.copy
 products.json
 dwi*
+bvals
+bvecs
 *~
 stderr.log
 stdout.log
