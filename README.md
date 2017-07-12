@@ -42,7 +42,7 @@ Now, run docker run to run the app
 docker run -it --rm \
     -v `pwd`/testdata:/input \
     -v `pwd`:/output \
-    app-datanormalizze
+    app-datanormalize
 
 ```
 
