@@ -6,7 +6,7 @@
 #return code 3 = unknown
 
 ##now wait for running to go away
-#progress_url={$SCA_PROGRESS_URL}/{$SCA_PROGRESS_KEY}
+#progress_url={$PROGRESS_URL}/{$PROGRESS_KEY}
 
 #TODO I should submit interactive session to run this
 
