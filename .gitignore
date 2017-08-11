@@ -10,3 +10,5 @@ bvecs
 *~
 stderr.log
 stdout.log
+_run.sh
+nohup.out

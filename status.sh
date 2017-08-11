@@ -5,11 +5,6 @@
 #return code 2 = failed
 #return code 3 = unknown
 
-##now wait for running to go away
-#progress_url={$PROGRESS_URL}/{$PROGRESS_KEY}
-
-#TODO I should submit interactive session to run this
-
 if [ -f finished ]; then
     code=`cat finished`
     if [ $code -eq 0 ]; then
@@ -22,6 +17,16 @@ if [ -f finished ]; then
     fi
 fi
 
-#assumed to be running... show the last lines from boot.log
-echo "running: " `tail -1 stdout.log`
-exit 0
+if [ -f pid ]; then
+    if ps -p $(cat pid) > /dev/null
+    then
+	    tail -1 stdout.log
+	    exit 0
+    else
+	    echo "no longer running but didn't finish"
+	    exit 2
+    fi
+fi
+
+echo "can't determine the status - maybe not yet started?"
+exit 3

@@ -19,8 +19,7 @@ end
 % load config.json
 config = loadjson('config.json');
 
-% copy the dwi file to this directory
-copyfile(config.dwi, 'dwi.nii.gz');
+system(sprintf('ln -s %s %s', config.dwi, 'dwi.nii.gz'))
 
 % Parameters used for normalization
 params.thresholds.b0_normalize    = 200;
@@ -39,7 +38,7 @@ bvals.unique(bvals.unique <= params.thresholds.b0_normalize) = 0;
 bvals.unique  = round(bvals.unique./params.thresholds.bvals_normalize) ...
     *params.thresholds.bvals_normalize;
 bvals.valnorm = bvals.unique( bvals.uindex );
-dlmwrite('dwi.bvals',bvals.valnorm);
+dlmwrite('dwi.bvals',bvals.valnorm,'delimiter',' ');
 
 %% Flip the Bvecs on chosen axis
 
@@ -63,9 +62,9 @@ if params.z_flip
     bvecs(3,:) = -bvecs(3,:);
 end
 
-savejson('', config,'products.json')
+%savejson('', config,'products.json')
 
-dlmwrite('dwi.bvecs', bvecs);
+dlmwrite('dwi.bvecs',bvecs,'delimiter',' ');
 
 end
 

@@ -12,21 +12,19 @@ fi
 
 echo "starting main"
 
-(
-    export MATLABPATH=$MATLABPATH:$SERVICE_DIR
-    nohup time matlab -nodisplay -nosplash -r main > stdout.log 2> stderr.log
-    echo $! > pid
+cat << EOT > _run.sh
+export MATLABPATH=$MATLABPATH:$SERVICE_DIR
+time matlab -nodisplay -nosplash -r main
 
-    #check for output files
-    if [ -s dwi.bvecs ] && [ -s dwi.bvals ];
-    then
+#check for output files
+if [ -s dwi.bvecs ] && [ -s dwi.bvals ]; then
 	echo 0 > finished
-    else
+else
 	echo "bvecs or bvals  missing"
 	echo 1 > finished
 	exit 1
-    fi
-) &
+fi
+EOT
 
-
-
+chmod +x _run.sh
+nohup ./_run.sh > stdout.log 2> stderr.log & echo $! > pid

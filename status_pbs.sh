@@ -4,9 +4,6 @@
 #return code 1 = finished successfully
 #return code 2 = failed
 
-##now wait for running to go away
-#progress_url={$SCA_PROGRESS_URL}/{$SCA_PROGRESS_KEY}
-
 if [ -f finished ]; then
     code=`cat finished`
     if [ $code -eq 0 ]; then
@@ -32,7 +29,6 @@ if [ -f jobid ]; then
     if [ $jobstate == "Q" ]; then
         echo "Waiting in the queue"
         eststart=`showstart $jobid | grep start`
-        [ -n "$SCA_PROGRESS_URL" ] && curl -s -X POST -H "Content-Type: application/json" -d "{\"msg\":\"Waiting in the PBS queue : $eststart\"}" $SCA_PROGRESS_URL > /dev/null
         exit 0
     fi
     if [ $jobstate == "R" ]; then
