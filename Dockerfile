@@ -1,4 +1,4 @@
-FROM brainlife/mcr:centos6-r2016a
+FROM brainlife/mcr:neurodebian1604-r2017a
 MAINTAINER Lindsey Kitchell <kitchell@indiana.edu>
 
 ADD /msa /msa

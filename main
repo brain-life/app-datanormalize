@@ -4,13 +4,14 @@
 #clean up previous job (just in case)
 rm -f finished
 
-which module &&  module load matlab
+which module &&  module load matlab && module load singularity
 
 echo "starting main"
 
+singularity exec -e docker://brainlife/normalizedata
 
-export MATLABPATH=$MATLABPATH:$SERVICE_DIR
-time matlab -nodisplay -nosplash -r main
+#export MATLABPATH=$MATLABPATH:$SERVICE_DIR
+#time matlab -nodisplay -nosplash -r main
 
 #check for output files
 if [ -s dwi.bvecs ] && [ -s dwi.bvals ]; then
