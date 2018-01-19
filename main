@@ -4,7 +4,7 @@
 #clean up previous job (just in case)
 rm -f finished
 
-which module &&  module load matlab && module load singularity
+module load singularity 2> /dev/null
 
 echo "starting main"
 
