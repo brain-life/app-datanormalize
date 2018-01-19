@@ -8,7 +8,9 @@ module load singularity 2> /dev/null
 
 echo "starting main"
 
-singularity exec -e docker://brainlife/normalizedata
+#singularity exec -e docker://brainlife/normalizedata
+singularity exec -e docker://brainlife/mcr:neurodebian1604-r2017a ./msa/main
+
 
 #export MATLABPATH=$MATLABPATH:$SERVICE_DIR
 #time matlab -nodisplay -nosplash -r main
